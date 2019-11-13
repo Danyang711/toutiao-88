@@ -26,7 +26,7 @@
 
         <!-- 登录 -->
       <el-form-item>
-        <el-button style="width:100%" type="primary" @click="submitForm('loginForm')">登录</el-button>
+        <el-button style="width:100%" type="primary" @click="login('loginForm')">登录</el-button>
       </el-form-item>
       </el-form>
   </el-card>
@@ -84,10 +84,18 @@ export default {
     }
   },
   methods: {
-    submitForm () {
+    login () {
       this.$refs.formObj.validate((isOK) => {
         if (isOK) {
-
+          // 调用接口登录
+          this.$axios({
+            url: '/authorizations',
+            data: this.loginForm,
+            method: 'post'
+          }).then((result) => {
+          //  储存到本地
+            window.localStorage.setItem('user-token', result.data.data.token)
+          })
         }
       })
     }
