@@ -95,6 +95,13 @@ export default {
           }).then((result) => {
           //  储存到本地
             window.localStorage.setItem('user-token', result.data.data.token)
+            this.$router.push('/home')
+          }).catch(() => {
+            // 提示消息
+            this.$message({
+              message: '您的手机号或验证码错误',
+              type: 'warning'
+            })
           })
         }
       })
