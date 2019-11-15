@@ -9,16 +9,18 @@ import Publish from '../views/publish'
 Vue.use(VueRouter)
 
 const routes = [
-
+  {
+    path: '/',
+    redirect: '/login'
+  },
   // 一级路由
   {
-    // 默认
-    path: '/',
+    path: '/layout',
     component: Layout,
     children: [
       {
         // 首页
-        path: '',
+        path: '/',
         component: Home
       },
       {
@@ -50,6 +52,25 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+// 路由的拦截器 beforeEach 方法
+router.beforeEach((to, from, next) => {
+  // 如果访问的是登录页面，则直接放行
+  if (to.path === '/login') {
+    next()
+
+    // 停止代码往后执行
+    return
+  }
+  // 获取用户 token
+  const token = window.localStorage.getItem('user-token')
+  // 判断是否有 token，有就通过
+  if (token) {
+    next()
+    // 没有，就跳转到登录页
+  } else {
+    next('/login')
+  }
 })
 
 export default router
