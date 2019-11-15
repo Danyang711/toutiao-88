@@ -6,19 +6,25 @@
        <img src="../../assets/img/logo_admin.png" alt="">
      </div>
      <!-- 左侧导航 -->
-     <el-menu style="width:221px" background-color="#353b4e" text-color="#adafb5" active-text-color="#ffd04b">
+     <el-menu
+        style="width:221px"
+        background-color="#353b4e"
+        text-color="#adafb5"
+        active-text-color="#ffd04b"
+        router
+     >
        <!-- 一级菜单 -->
-       <el-menu-item>首页</el-menu-item>
+       <el-menu-item index="/">首页</el-menu-item>
        <!-- 二级菜单 -->
-    <el-submenu>
+    <el-submenu index="1">
       <template slot="title">内容管理</template>
-      <el-menu-item>发布文章</el-menu-item>
-      <el-menu-item>内容列表</el-menu-item>
+      <el-menu-item index="/publish">发布文章</el-menu-item>
+      <el-menu-item index="/article">内容列表</el-menu-item>
       <el-menu-item>素材管理</el-menu-item>
       <el-menu-item>评论列表</el-menu-item>
     </el-submenu>
     <!-- 二级菜单 -->
-    <el-submenu>
+    <el-submenu index="2">
       <template slot="title">粉丝管理</template>
       <el-menu-item>图文数据</el-menu-item>
       <el-menu-item>粉丝概况</el-menu-item>
