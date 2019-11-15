@@ -73,6 +73,7 @@ router.beforeEach((to, from, next) => {
     // 没有，就跳转到登录页
   } else {
     next('/login')
+    NProgress.done()
   }
 })
 
