@@ -5,17 +5,18 @@ import Home from '../views/home'
 import Layout from '../views/layout'
 import Article from '../views/article'
 import Publish from '../views/publish'
+import NProgress from 'nprogress'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    redirect: '/login'
-  },
+  // {
+  //   path: '/',
+  //   // redirect: '/login'
+  // },
   // 一级路由
   {
-    path: '/layout',
+    path: '/',
     component: Layout,
     children: [
       {
@@ -55,6 +56,8 @@ const router = new VueRouter({
 })
 // 路由的拦截器 beforeEach 方法
 router.beforeEach((to, from, next) => {
+  // 开启进度条
+  NProgress.start()
   // 如果访问的是登录页面，则直接放行
   if (to.path === '/login') {
     next()
@@ -71,6 +74,11 @@ router.beforeEach((to, from, next) => {
   } else {
     next('/login')
   }
+})
+
+router.afterEach((to, from) => {
+  // 进度条完成
+  NProgress.done()
 })
 
 export default router
